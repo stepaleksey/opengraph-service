@@ -1,0 +1,13 @@
+version: "2"
+services:
+  uwsgi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: opengraph-uwsgi
+    container_name: opengraph-uwsgi
+    hostname: uwsgi
+    restart: unless-stopped
+    ports:
+      - 5001:5000
+    command: ["gunicorn", "run:app", "--bind", "0.0.0.0:5000"]
